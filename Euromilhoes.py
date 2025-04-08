@@ -6,7 +6,7 @@ while True:
     try:
         # Lista para armazenar os números
         numbers = []
-        for i in range(1, 6):
+        for i in range(0, 5):
             num = random.randint(1, 49)
             if num not in numbers:
                 numbers.append(num)

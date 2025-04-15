@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f3d12172652ecaa870edfbe3f963babe {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f3d12172652ecaa870edfbe3f963babe" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f3d12172652ecaa870edfbe3f963babe = L.map(
+                "map_f3d12172652ecaa870edfbe3f963babe",
+                {
+                    center: [56.1304, -106.3468],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b9ce3f4a51cf710c7f81648b95bb0db1 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b9ce3f4a51cf710c7f81648b95bb0db1.addTo(map_f3d12172652ecaa870edfbe3f963babe);
+        
+    
+            tile_layer_b9ce3f4a51cf710c7f81648b95bb0db1.addTo(map_f3d12172652ecaa870edfbe3f963babe);
+        
+    
+            var marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_633b22098a5257768319f32699935d84 = L.marker(
+                [43.65107, -79.347015],
+                {
+}
+            ).addTo(marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22);
+        
+    
+        var popup_5df9ada4f14b16a275d6a0a501d60b8f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9092f42220bea4e2966ceac1dbd9649 = $(`<div id="html_d9092f42220bea4e2966ceac1dbd9649" style="width: 100.0%; height: 100.0%;">Toronto<br>População: 2731571</div>`)[0];
+                popup_5df9ada4f14b16a275d6a0a501d60b8f.setContent(html_d9092f42220bea4e2966ceac1dbd9649);
+            
+        
+
+        marker_633b22098a5257768319f32699935d84.bindPopup(popup_5df9ada4f14b16a275d6a0a501d60b8f)
+        ;
+
+        
+    
+    
+            marker_633b22098a5257768319f32699935d84.bindTooltip(
+                `<div>
+                     Toronto
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6d7c493bc4ae1c1211833596fc715047 = L.marker(
+                [49.282729, -123.120738],
+                {
+}
+            ).addTo(marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22);
+        
+    
+        var popup_761c6f2de76dd196cdd0fd061e925125 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b42135e051c8927c484e7f184e8a6cee = $(`<div id="html_b42135e051c8927c484e7f184e8a6cee" style="width: 100.0%; height: 100.0%;">Vancouver<br>População: 631486</div>`)[0];
+                popup_761c6f2de76dd196cdd0fd061e925125.setContent(html_b42135e051c8927c484e7f184e8a6cee);
+            
+        
+
+        marker_6d7c493bc4ae1c1211833596fc715047.bindPopup(popup_761c6f2de76dd196cdd0fd061e925125)
+        ;
+
+        
+    
+    
+            marker_6d7c493bc4ae1c1211833596fc715047.bindTooltip(
+                `<div>
+                     Vancouver
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_50bee0a0f87d35252607886cc3af25fb = L.marker(
+                [45.501689, -73.567256],
+                {
+}
+            ).addTo(marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22);
+        
+    
+        var popup_d00298393025f21e73cb43df9149bc2a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f6b8462e3a7db429dc8438820020c2c = $(`<div id="html_1f6b8462e3a7db429dc8438820020c2c" style="width: 100.0%; height: 100.0%;">Montreal<br>População: 1704694</div>`)[0];
+                popup_d00298393025f21e73cb43df9149bc2a.setContent(html_1f6b8462e3a7db429dc8438820020c2c);
+            
+        
+
+        marker_50bee0a0f87d35252607886cc3af25fb.bindPopup(popup_d00298393025f21e73cb43df9149bc2a)
+        ;
+
+        
+    
+    
+            marker_50bee0a0f87d35252607886cc3af25fb.bindTooltip(
+                `<div>
+                     Montreal
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22.addTo(map_f3d12172652ecaa870edfbe3f963babe);
+        
+    
+            var layer_control_32e5090daf2ff6f1d79149dd815b94a5_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_b9ce3f4a51cf710c7f81648b95bb0db1,
+                },
+                overlays :  {
+                    "macro_element_2e22c959c18e5a27eb9f84c720cbdc22" : marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22,
+                },
+            };
+            let layer_control_32e5090daf2ff6f1d79149dd815b94a5 = L.control.layers(
+                layer_control_32e5090daf2ff6f1d79149dd815b94a5_layers.base_layers,
+                layer_control_32e5090daf2ff6f1d79149dd815b94a5_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_f3d12172652ecaa870edfbe3f963babe);
+
+        
+    
+            tile_layer_b9ce3f4a51cf710c7f81648b95bb0db1.addTo(map_f3d12172652ecaa870edfbe3f963babe);
+        
+    
+            marker_cluster_2e22c959c18e5a27eb9f84c720cbdc22.addTo(map_f3d12172652ecaa870edfbe3f963babe);
+        
+</script>
+</html>

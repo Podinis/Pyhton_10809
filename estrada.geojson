@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "estrada",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "nome": "Estrada Porto-Lisboa", "tipo": "Autoestrada A1" }, "geometry": { "type": "LineString", "coordinates": [ [ -8.611, 41.149 ], [ -9.139, 38.722 ] ] } }
+]
+}

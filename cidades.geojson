@@ -3,8 +3,7 @@
 "name": "cidades",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "cidade": "Porto" }, "geometry": { "type": "Point", "coordinates": [ -8.611, 41.149 ] } },
-{ "type": "Feature", "properties": { "cidade": "Lisboa" }, "geometry": { "type": "Point", "coordinates": [ -9.139, 38.722 ] } },
-{ "type": "Feature", "properties": { "cidade": "Braga" }, "geometry": { "type": "Point", "coordinates": [ -8.426, 41.545 ] } }
+{ "type": "Feature", "properties": { "cidade": "Porto", "populacao": 230000 }, "geometry": { "type": "Point", "coordinates": [ -8.611, 41.149 ] } },
+{ "type": "Feature", "properties": { "cidade": "Lisboa", "populacao": 500000 }, "geometry": { "type": "Point", "coordinates": [ -9.139, 38.722 ] } }
 ]
 }

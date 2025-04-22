@@ -1,6 +1,9 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
+import plotly.express as px
+import pandas as pd
+
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -23,6 +26,7 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
+
 sidebar = html.Div(
     [
         html.H2("Sidebar", className="display-4"),
@@ -41,21 +45,53 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
+# Carregar dataset   
+df = px.data.gapminder()
+
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 
-@app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+@app.callback(Output("page-content", "children"),
+               [Input("url", "pathname")])
+
+
 def render_page_content(pathname):
     if pathname == "/":
         return html.H1("🌍🌍 Dashboard Home", style={"textAlign": "center"})
     
+
     elif pathname == "/page-1":
-        return html.H1("🌍🌍 Encomendas", style={"textAlign": "center"})
+    
+        fig1 = px.scatter(
+        df,
+        x="gdpPercap", y="lifeExp",
+        size="pop", color="continent",
+        hover_name="country", log_x=True,
+        title=f"Esperança de vida vs PIB per capita "
+        )
+
+        return html.Div([
+            html.H1("🌍🌍 Encomendas", style={"textAlign": "center"}),
+            #Dropdown para escolher ano
+            html.Label("Escolhe o ano:", style={"fontSize": 20, "textAlign": "center", "fontWeight": "bold"}),
+            dcc.Dropdown(
+                id='dropdown-ano',
+                options=[{'label': ano, 'value': ano} for ano in sorted(df['year'].unique())],
+                value=2007,
+                clearable=False,
+                style={'width': '140px'}
+            ),
+
+            dcc.Graph(fig1)
+
+        ])
+    
     elif pathname == "/page-2":
         return  html.H1("🌍🌍 Vendas", style={"textAlign": "center"})
     # If the user tries to reach a different page, return a 404 message
+    
     return html.Div(
         [
             html.H1("404: Not found", className="text-danger"),

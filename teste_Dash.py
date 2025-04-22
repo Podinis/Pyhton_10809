@@ -5,7 +5,7 @@ import plotly.express as px
 import pandas as pd
 
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
@@ -29,9 +29,9 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2("Sidebar", className="display-4"),
+        html.H2("Logo", className="display-4"),
         html.Hr(),
-        html.P("A simple sidebar layout with navigation links", className="lead"),
+        html.P("Exemplo sidebar layout", className="lead"),
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
@@ -54,22 +54,27 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 
 @app.callback(Output("page-content", "children"),
-               [Input("url", "pathname")])
+               Input('url', 'pathname'),
+               Input('dropdown-ano', 'value')
+               )
 
 
-def render_page_content(pathname):
+def render_page_content(pathname, ano_selecionado):
+    dados_filtrados = df[df['year'] == ano_selecionado]
+
     if pathname == "/":
         return html.H1("🌍🌍 Dashboard Home", style={"textAlign": "center"})
     
 
     elif pathname == "/page-1":
-    
+        
+
         fig1 = px.scatter(
-        df,
-        x="gdpPercap", y="lifeExp",
-        size="pop", color="continent",
-        hover_name="country", log_x=True,
-        title=f"Esperança de vida vs PIB per capita "
+            dados_filtrados,
+            x="gdpPercap", y="lifeExp",
+            size="pop", color="continent",
+            hover_name="country", log_x=True,
+            title=f"Esperança de vida vs PIB per capita "
         )
 
         return html.Div([
@@ -84,7 +89,8 @@ def render_page_content(pathname):
                 style={'width': '140px'}
             ),
 
-            dcc.Graph(fig1)
+            # Gráfico de dispersão
+            dcc.Graph(id='grafico-dispersao', figure=fig1)
 
         ])
     
@@ -102,5 +108,6 @@ def render_page_content(pathname):
     )
 
 
-if __name__ == "__main__":
-    app.run(port=8888)
+# Executar a aplicação
+if __name__ == '__main__':
+    app.run(port="8088")

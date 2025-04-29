@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, dcc, html
+from dash import Input, Output, dcc, html, callback
 import plotly.express as px
 import pandas as pd
 
@@ -53,14 +53,15 @@ content = html.Div(id="page-content", style=CONTENT_STYLE)
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 
-@app.callback(Output("page-content", "children"),
-               Input('url', 'pathname'),
-               Input('dropdown-ano', 'value')
+@callback(Output("page-content", "children"),
+               Input('url', 'pathname')
                )
 
 
-def render_page_content(pathname, ano_selecionado):
-    dados_filtrados = df[df['year'] == ano_selecionado]
+def render_page_content(pathname):
+   
+     
+    #dados_filtrados = df[df['year'] == ano_selecionado]
 
     if pathname == "/":
         return html.H1("🌍🌍 Dashboard Home", style={"textAlign": "center"})
@@ -70,7 +71,7 @@ def render_page_content(pathname, ano_selecionado):
         
 
         fig1 = px.scatter(
-            dados_filtrados,
+            df,
             x="gdpPercap", y="lifeExp",
             size="pop", color="continent",
             hover_name="country", log_x=True,

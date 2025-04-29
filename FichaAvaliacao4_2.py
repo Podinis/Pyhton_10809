@@ -1,4 +1,5 @@
 # Carregar bibliotecas
+import webbrowser #inicio
 import dash
 from dash import html, dcc, Input, Output
 import plotly.express as px
@@ -16,29 +17,23 @@ app.layout = html.Div([
     html.H1("🌍🌍 Dashboard Interativo - Gapminder", style={"textAlign": "center"}),
 
     # Dropdown para escolher o ano
-    html.Label("Escolhe o ano:", style={"fontSize": 20, "textAlign": "center","fontWeight": "bold"}),
+    html.Label("Escolhe o ano:"),
     dcc.Dropdown(id='dropdown-ano',
                 options=[{'label': ano, 'value': ano} for ano in sorted(df['year'].unique())],
                 value=2007,
                 clearable=False,
-                style={'width': '140px'}
+                
                 ),
 
     # Gráfico de dispersão
-    dcc.Graph(id='grafico-dispersao'),  
+    dcc.Graph(id='grafico-dispersao'),
   
-    html.Div([
-               
-        # Histograma de população
-        dcc.Graph(id='histograma-populacao', style={'flex': '1'}),
-        
-        # Barra de população
-        dcc.Graph(id='barra-populacao', style={'flex': '1'})
-    ], style={'display': 'flex', 'justifyContent': 'space-between'})
+    # Histograma de população
+    dcc.Graph(id='histograma-populacao'),
     
+    # Barra de população
+    dcc.Graph(id='barra-populacao')
 ])
-
-
 
 # Callback para atualizar gráficos com base no dropdown
 @app.callback(
@@ -80,5 +75,6 @@ def atualizar_graficos(ano_selecionado):
     return fig1, fig2 , fig3
 
 # Executar a aplicação
+webbrowser.open("http://127.0.0.1:8050") #antes do main
 if __name__ == '__main__':
     app.run(debug=True)

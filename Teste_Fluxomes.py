@@ -22,7 +22,7 @@ try:
     cursor = connection.cursor()
 
     # Executando o comando SELECT
-    cursor.execute("SELECT * FROM dbo.OpOper WHERE dbo.OpOper.opId='929095'")
+    cursor.execute("SELECT  dbo.tbEncomenda.NumEnc, dbo.tbEncomenda.NumExtEnc, dbo.tbEncomenda.numter, dbo.tbEncomenda.desNumter, dbo.tbEncomenda.data, dbo.tbEncomenda.refcom, dbo.tbEncomenda.dataPedido, dbo.tbEncomenda.datacriacao, dbo.tbLinhaEnc.descricao, dbo.tbLinhaEnc.qty, dbo.tbLinhaEnc.seqNumEnc FROM dbo.tbEncomenda INNER JOIN dbo.tbLinhaEnc ON dbo.tbEncomenda.NumEnc = dbo.tbLinhaEnc.NumEnc where dbo.tbEncomenda.estado<>'S' and dbo.tbLinhaEnc.estado<>'S' and dbo.tbEncomenda.data >'01/01/2025'")
 
     # Recuperando todos os registros
     registros = cursor.fetchall()
@@ -30,35 +30,50 @@ try:
     # Obtendo os nomes das colunas
     colunas = [column[0] for column in cursor.description]
 
-    # Debug: Imprimindo o número de colunas e registros
-    print(f"Número de colunas retornadas: {len(colunas)}")
-    print(f"Número de registros retornados: {len(registros)}")
-
     # Verificando se há registros antes de criar o DataFrame
     if registros:
         # Convertendo os registros em um DataFrame do Pandas
         df = pd.DataFrame.from_records(registros, columns=colunas)
-        df = df.dropna()
+        df['qty'] = pd.to_numeric(df['qty'], errors='coerce')
 
-        # Agrupando e somando
-        df_graf = df.groupby('OperationId')['Qty'].sum().reset_index()
-
+        df.columns = df.columns.str.strip()
+        
+        # print("Colunas do DataFrame:", df.columns)  # Verificando as colunas
+        #print("Primeiras linhas do DataFrame:\n", df.head())  # Verificando os dados
+       
+        df = df.dropna(subset=['NumEnc', 'numter'])  # Removendo apenas linhas com nulos nessas colunas
+        #print("Primeiras linhas do DataFrame:\n", df.head())
+       # Agrupando e somando
+        try:
+            df_graf = df.groupby('numter')['qty'].sum().reset_index()
+            print("\nDataFrame agrupado:")
+            print(df_graf)
+        except KeyError as e:
+            print(f"KeyError: {e}. Verifique se a coluna existe.")
+                
+        media_enc = df.groupby('numter')['qty'].mean()
         # Plotando o gráfico de barras
-        plt.bar(df_graf['OperationId'], df_graf['Qty'])
-        plt.xlabel('OperationId')
-        plt.ylabel('Total Qty')
-        plt.title('Total Quantity by OperationId')
-        plt.xticks(rotation=45)  # Rotaciona os rótulos do eixo x, se necessário
+        fig, ax1 = plt.subplots(figsize=(8, 5))
+        ax1.bar(df_graf['numter'],df_graf['qty'],label="df_graf['numter']" ,)
+        ax1.set_xlabel('operationId')
+        ax1.set_ylabel('Total Qty')
+        ax1.set_xticks(range(len(df_graf.numter)), labels=df_graf.numter,rotation=45, ha="right", rotation_mode="anchor")
+        ax1.set_title('Total Quantity by Operation')
+        
+        ax2=ax1.twinx()
+        ax2.plot(df_graf['numter'],media_enc,color='red', marker='o', label='Média')
         plt.tight_layout()  # Ajusta o layout para evitar sobreposição
+        plt.grid(True, linestyle='--')
         plt.show()
 
-        # Definindo o caminho do arquivo de saída
-        #output_file = r'C:\Users\podin\output2.xlsx'
+        contagem = df["numter"].value_counts()
 
-        # Exportando o DataFrame para um arquivo Excel
-        #df.to_excel(output_file, index=False)
+        plt.figure(figsize=(6, 6))
+        plt.pie(contagem.values, autopct='%1.1f%%', startangle=140)
+        plt.title("Distribuição de Encomendas no Dataset")
+        plt.legend(title="Clientes", labels=contagem.index, loc="upper right")
+        plt.show()
 
-        #print(f'== Dados exportados para {output_file} ==')
     else:
         print("Nenhum registro encontrado.")
 
